@@ -39,4 +39,5 @@ pub use config::*;
 pub use error::*;
 pub use event_parser::Event;
 pub use event_parser::SSE;
+pub use event_parser::EventParser;
 pub use response::Response;
