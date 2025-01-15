@@ -1,4 +1,3 @@
-use crate::response::{ErrorBody, Response};
 
 /// Error type for invalid response headers encountered in ResponseDetails.
 #[derive(Debug)]
@@ -33,8 +32,6 @@ pub enum Error {
     StreamClosed,
     /// An invalid request parameter
     InvalidParameter(Box<dyn std::error::Error + Send + Sync + 'static>),
-    /// The HTTP response could not be handled.
-    UnexpectedResponse(Response, ErrorBody),
     /// An error reading from the HTTP response body.
     HttpStream(Box<dyn std::error::Error + Send + Sync + 'static>),
     /// The HTTP response stream ended
@@ -58,10 +55,6 @@ impl std::fmt::Display for Error {
             TimedOut => write!(f, "timed out"),
             StreamClosed => write!(f, "stream closed"),
             InvalidParameter(err) => write!(f, "invalid parameter: {err}"),
-            UnexpectedResponse(r, _) => {
-                let status = r.status();
-                write!(f, "unexpected response: {status}")
-            }
             HttpStream(err) => write!(f, "http error: {err}"),
             Eof => write!(f, "eof"),
             UnexpectedEof => write!(f, "unexpected eof"),

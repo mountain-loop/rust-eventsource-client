@@ -1,8 +1,7 @@
 [workspace]
 
 members = [
-  "contract-tests",
-  "eventsource-client"
+    "eventsource-client"
 ]
 
 resolver = "2"
